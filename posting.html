@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Posting</title>
+    <link rel="stylesheet" href="{{pss}}">
+</head>
+<body>
+
+    <!-- Fixed Header -->
+    <header class="header-container">
+        <div class="header-left">
+            <span class="logo">CRYPBLOG</span>
+            <button class="post-btn">Wallet</button>
+            <button class="post-btn">Profile</button>
+        </div>
+        <div class="header-right">
+            <button id="theme-toggle" class="theme-toggle">🌙</button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h1>Create a New Blog Post</h1>
+        <form method="post">
+        {{pf.hidden_tag()}}
+        {{pf.t.label}}
+        {{pf.t(placeholder="Enter blog title")}}
+        
+        {{pf.a.label}}
+        {{pf.a(placeholder="Enter author name")}}
+        
+        {{pf.c.label}}
+        {{pf.c(placeholder="Write your blog content here...")}}
+        
+        {{pf.submit(class="post-btn")}}
+        </form>
+    </div>
+
+    <script>
+        // Theme Toggle Logic
+        const themeToggle = document.getElementById("theme-toggle");
+        themeToggle.addEventListener("click", () => {
+            document.body.classList.toggle("dark-mode");
+            themeToggle.textContent = document.body.classList.contains("dark-mode") ? "☀️" : "🌙";
+        });
+    </script>
+
+</body>
+</html>

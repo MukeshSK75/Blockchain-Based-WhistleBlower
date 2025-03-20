@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CrypBlog</title>
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+  
+  body {
+    background-color: #f6f6f6;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+
+  }
+
+  header.header-simple {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px 0;
+  }
+  
+  .logo {
+    font-weight: bold;
+    font-size: 24px;
+  }
+  
+  .hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 60px 0;
+    gap: 30px;
+  }
+
+  .hero-content {
+    flex: 1;
+  }
+  
+  .hero-image {
+    flex: 1;
+    position: relative;
+  }
+  
+  .hero-image img {
+    width: 75%;
+    height: auto;
+    top: 30px;
+    right: 5px;
+    border-radius: 8px;
+    z-index: 1;
+    position: relative;
+  }
+  
+  .image-background {
+    position: absolute;
+    background-color: #0DD3A5;
+    width: 75%;
+    height: 100%;
+    top: 15px;
+    left: 15px;
+    border-radius: 8px;
+    z-index: 0;
+  }
+  
+  h1 {
+    font-size: 60px;
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+  
+  .subtitle {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 30px;
+  }
+  
+  .btn {
+    display: inline-block;
+    background-color: #0DD3A5;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    border: none;
+    font-size: 16px;
+  }
+  
+  .btn:hover {
+    background-color: #0bb08a;
+  }
+  
+  .btn:active {
+    transform: scale(0.98);
+  }
+  
+  .highlight {
+    background-color: #0DD3A5;
+    padding: 60px 0;
+    text-align: center;
+    margin: 60px 0;
+  }
+  
+  .highlight h2 {
+    color: rgb(0, 0, 0);
+    margin-bottom: 15px;
+    font-size: 28px;
+  }
+  
+  .highlight-profile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    gap: 10px;
+  }
+  
+  .highlight-profile img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .highlight-profile span {
+    color: rgb(0, 0, 0);
+    font-size: 14px;
+  }
+  
+  footer {
+    padding: 40px 0;
+  }
+  
+  .footer-top {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+  }
+  
+  .footer-brand {
+    flex: 1;
+    min-width: 200px;
+    margin-bottom: 20px;
+  }
+  
+  .footer-brand p {
+    margin: 10px 0 20px;
+    font-size: 14px;
+    color: #555;
+  }
+  
+  .social-icons {
+    display: flex;
+    gap: 15px;
+  }
+  
+  .social-icons a {
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  
+  .social-icons a:hover {
+    color: #0DD3A5;
+  }
+  
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 60px;
+  }
+  
+  .footer-column h3 {
+    margin-bottom: 15px;
+    font-size: 18px;
+  }
+  
+  .footer-column ul {
+    list-style: none;
+  }
+  
+  .footer-column ul li {
+    margin-bottom: 10px;
+  }
+  
+  .footer-column ul li a {
+    text-decoration: none;
+    color: #555;
+    font-size: 14px;
+    transition: color 0.3s;
+  }
+  
+  .footer-column ul li a:hover {
+    color: #0DD3A5;
+  }
+  
+  /* Modal styles */
+  .modal {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+    z-index: 10;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .modal-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    max-width: 500px;
+    width: 90%;
+    position: relative;
+  }
+  
+  .close-modal {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  input, textarea {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+  .form-heading {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .hero {
+      flex-direction: column;
+    }
+    
+    h1 {
+      font-size: 40px;
+    }
+    
+    .footer-top {
+      flex-direction: column;
+    }
+    
+    .footer-links {
+      margin-top: 20px;
+      gap: 30px;
+    }
+  }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header class="header-simple">
+            <div class="logo">CRYPBLOG</div>
+
+        </header>
+
+        <div class="hero">
+            <div class="hero-content">
+                <h1>Welcome to the blog.</h1>
+                <p class="subtitle">Connect with tech enthusiasts and explore the future</p>
+                <a href="{{url_for('register')}}"><button class="btn">Get started</button></a>
+            </div>
+            <div class="hero-image">
+                <div class="image-background"></div>
+                <img src={{userim}} alt="Futuristic tech">
+            </div>
+        </div>
+    </div>
+
+    <div class="highlight">
+        <div class="container">
+            <h2> Explore the future of blogging with CrypBlog</h2>
+            <div class="highlight-profile">
+                <img src={{userim2}} alt="Profile">
+                <span>Tech Insider, Blogger</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <footer>
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <div class="logo">CRYPBLOG</div>
+                    <p>Cutting-edge platform for futuristic blogging.</p>
+                    <div class="social-icons">
+                        <a href="#" class="twitter">Twitter</a>
+                        <a href="#" class="facebook">Facebook</a>
+                        <a href="#" class="linkedin">LinkedIn</a>
+                    </div>
+                </div>
+
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h3>Articles</h3>
+                        <ul>
+                            <li><a href="#">Community</a></li>
+                            <li><a href="#">Integrations</a></li>
+                            <li><a href="#">Premium</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-column">
+                        <h3>Settings</h3>
+                        <ul>
+                            <li><a href="#">Contact</a></li>
+                            <li><a href="#">Comparison</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-column">
+                        <h3>Profile</h3>
+                        <ul>
+                            <li><a href="#">About us</a></li>
+                            <li><a href="#">Career</a></li>
+                            <li><a href="#">Announcements</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-column">
+                        <h3>Help center</h3>
+                        <ul>
+                            <li><a href="#">Newsroom</a></li>
+                            <li><a href="#">Knowledge base</a></li>
+                            <li><a href="#">Customer service</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-column">
+                        <h3>Chat support</h3>
+                        <ul>
+                            <li><a href="#">Stay</a></li>
+                            <li><a href="#">Feedback</a></li>
+                            <li><a href="#">Contact us</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Modal -->
+    <div id="modal" class="modal" style="display: none;" onclick="handleOutsideClick(event)">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h2 class="form-heading">Join CrypBlog</h2>
+            <form onsubmit="handleSubmit(event)">
+                <input type="text" name="name" placeholder="Name" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <textarea name="interests" placeholder="Tell us about your interests"></textarea>
+                <button type="submit" class="btn">Sign Up</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

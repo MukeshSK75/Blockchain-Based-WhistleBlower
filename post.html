@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <title>Test</title>
+    <style>
+        body{
+    background:lightblue;
+}
+
+
+    </style>
+    </head>
+    <body>
+        <div class="post">
+            <h1>{{loc.title}}</h1><br>
+            <p>posted by: {{loc.author}} on {{loc.date_created}}</p>
+            <br>
+            <p>
+                {{loc.text|safe}}
+            </p>
+            <br>
+        </div>
+    </body>
+</html>

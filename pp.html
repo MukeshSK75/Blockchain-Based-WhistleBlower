@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en" class="light-mode">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRYPBLOG - Main Feed</title>
+    <style>
+        :root {
+            --bg-color: #FFFFFF;
+            --card-bg: #F5F8FA;
+            --text-color: #14171A;
+            --secondary-text: #657786;
+            --border-color: #E1E8ED;
+            --primary-color: #00E3A5;
+            --hover-color: #F5F8FA;
+        }
+       
+        .dark-mode {
+            --bg-color: #121212;
+            --card-bg: #1E1E1E;
+            --text-color: #FFFFFF;
+            --secondary-text: #B0B0B0;
+            --border-color: #333333;
+            --hover-color: rgba(255, 255, 255, 0.1);
+        }
+       
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+       
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+       
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+       
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+       
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+       
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--text-color);
+            margin-right: 20px;
+        }
+       
+        .header-right {
+            display: flex;
+            align-items: center;
+        }
+        a{
+  text-decoration: none;
+  color: #00E3A5;
+
+}
+
+        button {
+            background-color: var(--primary-color);
+            color: #000;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+       
+        button:hover {
+            opacity: 0.9;
+        }
+       
+        .theme-toggle {
+            background: transparent;
+            color: var(--text-color);
+            border: none;
+            padding: 8px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s;
+        }
+       
+        .theme-toggle:hover {
+            background-color: var(--hover-color);
+        }
+       
+        .wallet-btn, .profile-btn {
+            background-color: transparent;
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 8px 12px;
+            border-radius: 20px;
+        }
+       
+        .wallet-btn:hover, .profile-btn:hover {
+            background-color: var(--hover-color);
+        }
+       
+        .main-content {
+            display: flex;
+            margin-top: 20px;
+        }
+       
+        .sidebar {
+            width: 250px;
+            padding-right: 20px;
+        }
+       
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 15px;
+            border-radius: 30px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            color: var(--text-color);
+        }
+       
+        .nav-item:hover {
+            background-color: var(--hover-color);
+        }
+       
+        .nav-item.active {
+            font-weight: bold;
+        }
+       
+        .nav-item i {
+            font-size: 20px;
+        }
+       
+        .feed {
+            flex: 1;
+            border-left: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+        }
+       
+        .compose {
+            padding: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+       
+        .compose-input {
+            width: 100%;
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 15px;
+            color: var(--text-color);
+            margin-bottom: 10px;
+            resize: none;
+        }
+       
+        .compose-actions {
+            display: flex;
+            justify-content: flex-end;
+        }
+       
+        .post {
+            padding: 15px;
+            border-bottom: 1px solid var(--border-color);
+            transition: background-color 0.2s;
+        }
+       
+        .post:hover {
+            background-color: var(--hover-color);
+        }
+       
+        .post-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+       
+        .profile-pic {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            margin-right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #000;
+        }
+       
+        .encrypted-username {
+            font-weight: bold;
+            font-family: monospace;
+            background-color: rgba(0, 227, 165, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+       
+        .post-time {
+            margin-left: 10px;
+            color: var(--secondary-text);
+            font-size: 14px;
+        }
+       
+        .post-content {
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+       
+        .post-actions {
+            display: flex;
+            gap: 20px;
+            color: var(--secondary-text);
+        }
+       
+        .post-actions span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+        }
+       
+        .post-actions span:hover {
+            color: var(--primary-color);
+        }
+       
+        .trends {
+            width: 300px;
+            padding-left: 20px;
+        }
+       
+        .trends-card {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+       
+        .trends-header {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+       
+        .trend-item {
+            margin-bottom: 15px;
+            cursor: pointer;
+        }
+       
+        .trend-item:hover .trend-tag {
+            text-decoration: underline;
+        }
+       
+        .trend-category {
+            font-size: 13px;
+            color: var(--secondary-text);
+        }
+       
+        .trend-tag {
+            font-weight: bold;
+            margin: 5px 0;
+        }
+       
+        .trend-posts {
+            font-size: 13px;
+            color: var(--secondary-text);
+        }
+       
+        @media (max-width: 1024px) {
+            .trends {
+                display: none;
+            }
+        }
+       
+        @media (max-width: 768px) {
+            .sidebar {
+                width: auto;
+            }
+            .nav-text {
+                display: none;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-left">
+                <div class="logo">CRYPBLOG</div>
+                <button class="wallet-btn">
+                    <i class="fas fa-wallet"></i>
+                    <a href="{{url_for('wallet')}}"><span>Wallet</span></a>
+                </button>
+                <button class="profile-btn">
+                    <i class="fas fa-user-circle"></i>
+                    <span>Profile</span>
+                </button>
+                <button class="profile-btn">
+                    <i class="fas fa-user-circle"></i>
+                    <a href="{{url_for('logout')}}">logout</a>
+                </button>
+            </div>
+            <div class="header-right">
+                <button class="theme-toggle" id="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </header>
+       
+        <div class="main-content">
+            <div class="sidebar">
+                <div class="nav-item active">
+                    
+                    <i class="fas fa-home"></i>
+                    <a href="{{url_for('hom')}}"><span class="nav-text">Home</span></a>
+                </div>
+                <div class="nav-item">
+                    <i class="fas fa-search"></i>
+                    <span class="nav-text">Explore</span>
+                </div>
+               
+                <a href="{{url_for('post')}}">
+                <button style="width: 100%; margin-top: 15px;">
+                    <i class="fas fa-feather-alt"></i>
+                    <span class="nav-text">Post</span>
+                </button>
+            </a>
+            </div>
+           
+            <div class="feed">
+                <div class="compose">
+                    <textarea class="compose-input" placeholder="What's happening in crypto?"></textarea>
+                    <div class="compose-actions">
+                        <a href="{{url_for('post')}}"><button>Post</button></a>
+                    </div>
+                </div>
+               
+                
+               
+                <div class="post">
+                    {% for post in posts %}
+                    <a href="{{url_for('loc',post_id=post.id)}}">
+                    <div class="post-header">
+                        <div class="profile-pic">P</div>
+                        <div class="encrypted-username">{{post.author}}</div>
+                        <div class="post-time">{{post.date_created}}</div>
+                    </div>
+                    <div class="post-content">
+                        {{post.title}}
+                    </div>
+                    </a>
+                    <div class="post-actions">
+                        <span><i class="far fa-comment"></i> 31</span>
+                        <span><i class="fas fa-retweet"></i> 52</span>
+                        <span><i class="far fa-heart"></i> 164</span>
+                        <span><i class="far fa-share-square"></i></span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+           
+        </div>
+    </div>
+   
+    <script>
+        // Dark mode toggle functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+       
+        themeToggle.addEventListener('click', () => {
+            if (htmlElement.classList.contains('light-mode')) {
+                htmlElement.classList.remove('light-mode');
+                htmlElement.classList.add('dark-mode');
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            } else {
+                htmlElement.classList.remove('dark-mode');
+                htmlElement.classList.add('light-mode');
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+            }
+        });
+    </script>
+</body>
+</html>

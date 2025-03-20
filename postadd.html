@@ -1,0 +1,53 @@
+
+
+
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <title>Test</title>
+    <style>
+        body{
+    background:lightblue;
+}
+
+.ff{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+form{
+    position: relative;
+    background: #ff5252;  
+    align-items: center;
+    padding: 40px;
+    border-radius: 4px;
+    box-shadow: 0 15px 35px rgba(0,0,0,9);
+    flex-direction: column;
+    overflow: hidden;
+    margin-top: 300px;
+    display: flex;
+    align-items: center;
+}
+    </style>
+    </head>
+    <body>
+        <div class="ff">
+        <form  method="post">
+            {{pf.hidden_tag()}}
+            {{pf.t.label}}
+            {{pf.t}}
+            <br>
+            {{pf.a.label}}
+            {{pf.a}}
+            <br>
+            {{pf.c.label}}
+            {{pf.c}}
+            <br>
+            {{pf.submit()}}
+
+        </form>
+        </div>
+    </body>
+</html>
